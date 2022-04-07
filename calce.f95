@@ -1,3 +1,4 @@
+!  collect the number of signifcant digits and a file name
    implicit none
 
    integer :: n
@@ -7,11 +8,12 @@
    read(*, *) n
    write(*, *) "Enter the output location file-name: "
    read(*, *) fname
-   call keepe(n, fname)
+   call ecalculation(n, fname)
 
 contains
 
-subroutine keepe(n, fname)
+!calculate e and put it in d
+subroutine ecalculation(n, fname)
 
    implicit none
 
@@ -52,14 +54,26 @@ subroutine keepe(n, fname)
       open(1, file=fname, status='old')
    end if
 
+   call keepe(n, d)
+
+   close(1)
+   deallocate(coef)
+end subroutine ecalculation
+
+!print e into the file
+subroutine keepe(n, d)
+
+   implicit none
+
+   integer, intent(in) :: n;
+   integer, dimension(n + 1), intent(in) :: d
+   integer :: i
+
    write(1, "(i0, A)", advance="no") d(1), "."
 
    do i = 2, n
       write(1, "(i0)", advance="no") d(i)
    end do
-
-   close(1)
-   deallocate(coef)
 end subroutine keepe
 
 end

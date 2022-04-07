@@ -4,27 +4,34 @@ with ada.strings.unbounded; use ada.strings.unbounded;
 with ada.strings.unbounded.Text_IO; use ada.strings.unbounded.Text_IO;
 with Ada.Numerics.Elementary_Functions; use Ada.Numerics.Elementary_Functions;
 
+--calce collects the number of significant digits and the filename from the user
 procedure calce is
    n : integer;
    filename : unbounded_string;
 
-   procedure keepe(n : integer; filename : unbounded_string) is
-     d : array(0..(n + 1)) of integer;
-     test : float;
-     m : integer := 4;
-     i, j, carry, temp : integer;
-     fp : file_type;
+   --ecalculation calculates e and prints it to the filename
+   procedure ecalculation(n : integer; filename : unbounded_string) is
+      --d holds e
+      d : array(0..(n + 1)) of integer;
+      test : float;
+      m : integer := 4;
+      i, j, carry, temp : integer;
+      fp : file_type;
+
    begin
       Ada.Integer_Text_IO.Default_Width := 0;
 
       test := (float(n) + 1.0) * 2.30258509;
+      
       loop
          exit when ((float(m) * (log(float(m)) - 1.0)) + 0.5 * log(6.2831852 * float(m))) > test;
          m := m + 1;
       end loop;
+
       declare
          coef : array(0..(m + 1)) of integer;
       begin
+
          j := 2;
          loop
             exit when j > m;
@@ -33,6 +40,7 @@ procedure calce is
          end loop;
          d(0) := 2;
          i := 1;
+
          loop
             exit when i > n;
             carry := 0;
@@ -61,7 +69,7 @@ procedure calce is
 
          close(fp);
       end;
-   end keepe;
+   end ecalculation;
 
 
 begin
@@ -70,5 +78,5 @@ begin
 	skip_line;
 	put("Enter the output location file-name: ");
 	get_line(filename);
-	keepe(n, filename);
+	ecalculation(n, filename);
 end calce;
