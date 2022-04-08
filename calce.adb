@@ -8,15 +8,34 @@ with Ada.Numerics.Elementary_Functions; use Ada.Numerics.Elementary_Functions;
 procedure calce is
    n : integer;
    filename : unbounded_string;
+   d : array(0..(8000)) of integer;
 
-   --ecalculation calculates e and prints it to the filename
+   --Prints e to the filename
+   procedure keepe(n : integer; filename : unbounded_string) is
+      fp : file_type;
+      i : integer;
+   begin
+      create(fp, out_file, To_String(filename));
+
+      put(fp, d(0));
+      put(fp, ".");
+      i := 1;
+      loop
+         exit when i = n;
+         put(fp, d(i));
+         i := i + 1;
+      end loop;
+
+      close(fp);
+   end keepe;
+
+   --ecalculation calculates e
    procedure ecalculation(n : integer; filename : unbounded_string) is
       --d holds e
-      d : array(0..(n + 1)) of integer;
+      
       test : float;
       m : integer := 4;
       i, j, carry, temp : integer;
-      fp : file_type;
 
    begin
       Ada.Integer_Text_IO.Default_Width := 0;
@@ -56,18 +75,8 @@ procedure calce is
             i := i + 1;
          end loop;
 
-         create(fp, out_file, To_String(filename));
+         keepe(n, filename);
 
-         put(fp, d(0));
-         put(fp, ".");
-         i := 1;
-         loop
-            exit when i = n;
-            put(fp, d(i));
-            i := i + 1;
-         end loop;
-
-         close(fp);
       end;
    end ecalculation;
 
