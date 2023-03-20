@@ -1,3 +1,8 @@
+#
+#     Created by: Justin Stewart
+#     Email: stewartm.justin@outlook.com
+#
+
 import numpy
 
 #Print e to n significant digits to the file
@@ -25,15 +30,16 @@ def ecalculation(n, fname):
 	for i in range(1, n + 1, 1):
 	   carry = 0
 	   for j in range(m, 1, -1):
-	   	temp = coef[j - 2] * 10 + carry
-	   	carry = temp/j
-	   	coef[j - 2] = temp - carry * j
-	   d.append(carry)
+	   	temp = int(coef[j - 2] * 10 + carry);
+	   	carry = int(temp/j);
+	   	coef[j - 2] = int(temp - carry * j);
+	   d.append(int(carry))
 	
 	keepe(n, fname, d)
 
 #collect the number of sigificant digits and a file name from the user
 #and call all other subprograms
-n = input("Enter the number of significant digits to calculate:")
-fname = raw_input("Enter the output location file-name:")
+n = input("Enter the number of significant digits to calculate:");
+n = int(n);
+fname = input("Enter the output location file-name:");
 ecalculation(n, fname)

@@ -1,3 +1,10 @@
+!
+!     Created By: Justin Stewart
+!     Email: stewartm.justin@outlook.com
+!
+
+
+
 !  collect the number of signifcant digits and a file name
    implicit none
 

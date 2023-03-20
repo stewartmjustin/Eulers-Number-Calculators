@@ -1,3 +1,8 @@
+--
+--     Created By: Justin Stewart
+--     Email: stewartm.justin@outlook.com
+--
+
 with Text_IO; use Text_IO;
 with ada.Integer_Text_IO; use Ada.Integer_Text_IO;
 with ada.strings.unbounded; use ada.strings.unbounded;

@@ -1,3 +1,8 @@
+/*
+     Created by: Justin Stewart
+     Email: stewartm.justin@outlook.com
+*/
+
 #include <stdio.h>
 #include <math.h>
 #include <string.h>
